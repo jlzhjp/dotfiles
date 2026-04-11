@@ -1,8 +1,8 @@
 (local vim _G.vim)
-(local core (require "config.core"))
-(local plugins (require "config.plugins"))
-(local behavior (require "config.behavior"))
-(local keymaps (require "config.keymaps"))
+(local core (include "config.core"))
+(local plugins (include "config.plugins"))
+(local behavior (include "config.behavior"))
+(local keymaps (include "config.keymaps"))
 
 ((. core :setup))
 
@@ -45,9 +45,18 @@
   ((. (require :mini.pairs) :setup) {})
   ((. (require :mini.pick) :setup) {})
   ((. (require :mini.extra) :setup) {})
+  ((. (require :mini.notify) :setup) {})
   ((. (require :which-key) :setup) {})
   ((. (require :blink.cmp) :setup) {:completion {:list {:selection {:preselect false}}}})
   ((. (require :conform) :setup) {:default_format_opts {:lsp_format "fallback"}})
+
+  (when vim.g.fennel_bootstrap_compiled
+    (vim.schedule
+      (fn []
+        (vim.notify
+          (.. "Recompiled Fennel config from " vim.g.fennel_bootstrap_compiled_count " source files")
+          vim.log.levels.INFO
+          {:title "Neovim bootstrap"}))))
 
   (vim.lsp.config "racket_langserver" {:filetypes ["racket"]})
   (vim.lsp.config

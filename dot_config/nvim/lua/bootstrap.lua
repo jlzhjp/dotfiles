@@ -74,6 +74,7 @@ end
 
 local function compile_if_needed()
   local source_hash = source_tree_hash()
+  local source_files = scandir(fnl_dir, {})
 
   local compiled_missing = not file_exists(compiled_path)
   local source_changed = compiled_missing
@@ -100,12 +101,13 @@ local function compile_if_needed()
   }, ";")
   local compiled = fennel.compileString(read_file(fnl_path), {
     filename = fnl_path,
-    requireAsInclude = true,
   })
   fennel.path = old_fennel_path
 
   write_file(compiled_path, compiled)
   write_file(source_hash_path, source_hash)
+  vim.g.fennel_bootstrap_compiled = true
+  vim.g.fennel_bootstrap_compiled_count = #source_files
 end
 
 function M.load()

@@ -1,1 +1,1 @@
-(require "config.main")
+(include "config.main")
