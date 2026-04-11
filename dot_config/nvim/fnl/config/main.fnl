@@ -4,6 +4,14 @@
 (local behavior (include "config.behavior"))
 (local keymaps (include "config.keymaps"))
 
+(macro setup-modules [specs]
+  (let [forms []]
+    (each [_ spec (ipairs specs)]
+      (let [module (. spec 1)
+            opts (or (. spec 2) {})]
+        (table.insert forms `((. (require ,module) :setup) ,opts))))
+    `(do ,(unpack forms))))
+
 ((. core :setup))
 
 (when (not vim.g.vscode)
@@ -11,6 +19,7 @@
 
   (vim.lsp.enable
     ["rust_analyzer"
+     "fennel_ls"
      "gopls"
      "harper_ls"
      "hls"
@@ -20,11 +29,12 @@
      "yamlls"
      "scheme_langserver"])
 
-  ((. (require :mini.basics) :setup) {:options {:extra_ui true}})
-  ((. (require :mini.files) :setup) {})
-  ((. (require :mini.icons) :setup) {})
-  ((. (require :mini.tabline) :setup) {})
-  ((. (require :mini.statusline) :setup) {})
+  (setup-modules
+    [["mini.basics" {:options {:extra_ui true}}]
+     ["mini.files"]
+     ["mini.icons"]
+     ["mini.tabline"]
+     ["mini.statusline"]])
   ((. (require :mini.surround) :setup)
    {:mappings {:add "ys"
                :delete "ds"
@@ -40,13 +50,14 @@
   (vim.keymap.set "x" "S" ":<C-u>lua MiniSurround.add('visual')<CR>" {:silent true})
   (vim.keymap.set "n" "yss" "ys_" {:remap true})
 
-  ((. (require :mini.ai) :setup) {})
-  ((. (require :mini.jump2d) :setup) {})
-  ((. (require :mini.pairs) :setup) {})
-  ((. (require :mini.pick) :setup) {})
-  ((. (require :mini.extra) :setup) {})
-  ((. (require :mini.notify) :setup) {})
-  ((. (require :which-key) :setup) {})
+  (setup-modules
+    [["mini.ai"]
+     ["mini.jump2d"]
+     ["mini.pairs"]
+     ["mini.pick"]
+     ["mini.extra"]
+     ["mini.notify"]
+     ["which-key"]])
   ((. (require :blink.cmp) :setup) {:completion {:list {:selection {:preselect false}}}})
   ((. (require :conform) :setup) {:default_format_opts {:lsp_format "fallback"}})
 
