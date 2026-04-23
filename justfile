@@ -3,10 +3,10 @@ default: all
 all: format lint
 
 format:
-    nixfmt flake.nix home.nix
-    fnlfmt --fix dot_config/nvim/fnl/init.fnl dot_config/nvim/fnl/config/*.fnl
+    nixfmt flake.nix home.nix modules/*.nix
+    fnlfmt --fix config/nvim/*.fnl
 
 lint:
     statix check .
     deadnix .
-    fennel --add-fennel-path dot_config/nvim/fnl/?.fnl --add-fennel-path dot_config/nvim/fnl/?/init.fnl --compile dot_config/nvim/fnl/init.fnl > /tmp/home-manager-nvim-init.lua
+    fennel --add-fennel-path config/nvim/?.fnl --add-fennel-path config/nvim/?/init.fnl --compile config/nvim/init.fnl > /tmp/home-manager-nvim-init.lua

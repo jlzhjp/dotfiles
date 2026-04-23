@@ -1,8 +1,8 @@
 (local vim _G.vim)
-(local core (include :config.core))
-(local plugins (include :config.plugins))
-(local behavior (include :config.behavior))
-(local keymaps (include :config.keymaps))
+(local core (include :core))
+(local plugins (include :plugins))
+(local behavior (include :behavior))
+(local keymaps (include :keymaps))
 
 (macro setup-modules [specs]
   (let [forms []]

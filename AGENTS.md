@@ -4,7 +4,8 @@
 
 - This repository is a Nix Home Manager configuration for user `akari`.
 - Ask for elevated approval before running `nix`, `home-manager`, or other commands that need to escape the sandbox.
-- Do not reintroduce Neovim runtime Fennel compilation. Home Manager builds `dot_config/nvim/fnl/init.fnl` into the installed Neovim `init.lua`.
+- Do not reintroduce Neovim runtime Fennel compilation. Home Manager builds `config/nvim/init.fnl` into the installed Neovim `init.lua`.
+- Keep user-facing Home Manager code in modules under `modules/`; keep application source files under `config/`.
 - Keep generated files out of the source tree unless the user explicitly asks otherwise.
 - Do not revert user changes or unrelated work in this repository.
 
