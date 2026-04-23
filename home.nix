@@ -27,6 +27,7 @@
       pkgs.pnpm
       pkgs.rustup
       pkgs.statix
+      pkgs.tree-sitter
       pkgs.uv
     ];
 

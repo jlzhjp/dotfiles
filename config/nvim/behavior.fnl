@@ -15,7 +15,12 @@
   (vim.api.nvim_create_autocmd :FileType
                                {:pattern [:clojure :racket :scheme :lisp]
                                 :callback (fn []
-                                            ((. (require :nvim-paredit) :setup) {})
+                                            ((. (require :nvim-paredit) :setup) {:filetypes [:clojure
+                                                                                             :fennel
+                                                                                             :scheme
+                                                                                             :lisp
+                                                                                             :janet
+                                                                                             :racket]})
                                             (vim.keymap.set :i "'" "'"
                                                             {:buffer true})
                                             (vim.keymap.set :i "`" "`"
