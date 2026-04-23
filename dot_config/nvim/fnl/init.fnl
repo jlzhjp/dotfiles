@@ -1,1 +1,1 @@
-(include "config.main")
+(include :config.main)

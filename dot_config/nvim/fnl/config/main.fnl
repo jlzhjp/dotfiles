@@ -1,8 +1,8 @@
 (local vim _G.vim)
-(local core (include "config.core"))
-(local plugins (include "config.plugins"))
-(local behavior (include "config.behavior"))
-(local keymaps (include "config.keymaps"))
+(local core (include :config.core))
+(local plugins (include :config.plugins))
+(local behavior (include :config.behavior))
+(local keymaps (include :config.keymaps))
 
 (macro setup-modules [specs]
   (let [forms []]
@@ -10,73 +10,60 @@
       (let [module (. spec 1)
             opts (or (. spec 2) {})]
         (table.insert forms `((. (require ,module) :setup) ,opts))))
-    `(do ,(unpack forms))))
+    `(do
+       ,(unpack forms))))
 
 ((. core :setup))
 
 (when (not vim.g.vscode)
   ((. plugins :add))
-
-  (vim.lsp.enable
-    ["rust_analyzer"
-     "fennel_ls"
-     "gopls"
-     "harper_ls"
-     "hls"
-     "racket_langserver"
-     "ocamllsp"
-     "ty"
-     "yamlls"
-     "scheme_langserver"])
-
-  (setup-modules
-    [["mini.basics" {:options {:extra_ui true}}]
-     ["mini.files"]
-     ["mini.icons"]
-     ["mini.tabline"]
-     ["mini.statusline"]])
-  ((. (require :mini.surround) :setup)
-   {:mappings {:add "ys"
-               :delete "ds"
-               :find ""
-               :find_left ""
-               :highlight ""
-               :replace "cs"
-               :suffix_last ""
-               :suffix_next ""}
-    :search_method "cover_or_next"})
-
-  (vim.keymap.del "x" "ys")
-  (vim.keymap.set "x" "S" ":<C-u>lua MiniSurround.add('visual')<CR>" {:silent true})
-  (vim.keymap.set "n" "yss" "ys_" {:remap true})
-
-  (setup-modules
-    [["mini.ai"]
-     ["mini.jump2d"]
-     ["mini.pairs"]
-     ["mini.pick"]
-     ["mini.extra"]
-     ["mini.notify"]
-     ["which-key"]])
+  (vim.lsp.enable [:rust_analyzer
+                   :fennel_ls
+                   :gopls
+                   :harper_ls
+                   :hls
+                   :racket_langserver
+                   :ocamllsp
+                   :ty
+                   :yamlls
+                   :scheme_langserver])
+  (setup-modules [[:mini.basics {:options {:extra_ui true}}]
+                  [:mini.files]
+                  [:mini.icons]
+                  [:mini.tabline]
+                  [:mini.statusline]])
+  ((. (require :mini.surround) :setup) {:mappings {:add :ys
+                                                   :delete :ds
+                                                   :find ""
+                                                   :find_left ""
+                                                   :highlight ""
+                                                   :replace :cs
+                                                   :suffix_last ""
+                                                   :suffix_next ""}
+                                        :search_method :cover_or_next})
+  (vim.keymap.del :x :ys)
+  (vim.keymap.set :x :S ":<C-u>lua MiniSurround.add('visual')<CR>"
+                  {:silent true})
+  (vim.keymap.set :n :yss :ys_ {:remap true})
+  (setup-modules [[:mini.ai]
+                  [:mini.jump2d]
+                  [:mini.pairs]
+                  [:mini.pick]
+                  [:mini.extra]
+                  [:mini.notify]
+                  [:which-key]])
   ((. (require :blink.cmp) :setup) {:completion {:list {:selection {:preselect false}}}})
-  ((. (require :conform) :setup) {:default_format_opts {:lsp_format "fallback"}})
-
+  ((. (require :conform) :setup) {:default_format_opts {:lsp_format :fallback}})
   (when vim.g.fennel_bootstrap_compiled
-    (vim.schedule
-      (fn []
-        (vim.notify
-          (.. "Recompiled Fennel config from " vim.g.fennel_bootstrap_compiled_count " source files")
-          vim.log.levels.INFO
-          {:title "Neovim bootstrap"}))))
-
-  (vim.lsp.config "racket_langserver" {:filetypes ["racket"]})
-  (vim.lsp.config
-    "yamlls"
-    {:settings
-     {:yaml
-      {:schemaStore {:enable false :url ""}
-       :schemas ((. behavior :yaml-schemas))}}})
-
+    (vim.schedule (fn []
+                    (vim.notify (.. "Recompiled Fennel config from "
+                                    vim.g.fennel_bootstrap_compiled_count
+                                    " source files")
+                                vim.log.levels.INFO {:title "Neovim bootstrap"}))))
+  (vim.lsp.config :racket_langserver {:filetypes [:racket]})
+  (vim.lsp.config :yamlls
+                  {:settings {:yaml {:schemaStore {:enable false :url ""}
+                                     :schemas ((. behavior :yaml-schemas))}}})
   ((. behavior :setup-paredit-autocmd))
   ((. behavior :setup-diagnostics))
   ((. keymaps :setup) behavior)
