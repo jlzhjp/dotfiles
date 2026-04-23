@@ -19,11 +19,13 @@
       pkgs.deadnix
       pkgs.fennel-ls
       pkgs.fnlfmt
+      pkgs.harper
       pkgs.just
       pkgs.luaPackages.fennel
       pkgs.nixfmt
       pkgs.nodejs
       pkgs.pnpm
+      pkgs.rustup
       pkgs.statix
       pkgs.uv
     ];
