@@ -2,7 +2,6 @@
 
 let
   source = ../config/nvim;
-  queriesSource = ../config/nvim/queries;
   nvimConfig = pkgs.runCommand "nvim-config" { nativeBuildInputs = [ pkgs.luaPackages.fennel ]; } ''
     mkdir -p "$out"
 
@@ -15,7 +14,7 @@ let
 in
 {
   xdg.configFile = {
-    "nvim/init.lua".source = "${nvimConfig}/init.lua";
-    "nvim/queries".source = queriesSource;
+    "nvim/init.lua".source = nvimConfig + "/init.lua";
+    "nvim/queries".source = source + "/queries";
   };
 }

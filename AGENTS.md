@@ -6,7 +6,6 @@
 - Ask for elevated approval before running `nix`, `home-manager`, or other commands that need to escape the sandbox.
 - Do not reintroduce Neovim runtime Fennel compilation. Home Manager builds `config/nvim/init.fnl` into the installed Neovim `init.lua`.
 - Do not manage `~/.config/nvim` as one immutable directory. Manage `nvim/init.lua` (generated from `config/nvim/init.fnl`) and explicit subpaths like `nvim/queries`, while keeping the `~/.config/nvim` root writable so `vim.pack` can create its untracked lockfile there.
-- For `xdg.configFile` directory sources (for example `nvim/queries`), prefer direct Nix path values (for example `../config/nvim/queries`) over interpolated strings (for example `"${source}/queries"`), so flake builds keep stable store links.
 - Keep user-facing Home Manager code in modules under `modules/`; keep application source files under `config/`.
 - Keep generated files out of the source tree unless the user explicitly asks otherwise.
 - Do not revert user changes or unrelated work in this repository.
