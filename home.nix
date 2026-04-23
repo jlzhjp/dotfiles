@@ -4,6 +4,7 @@
   imports = [
     ./modules/fish.nix
     ./modules/neovim.nix
+    ./modules/starship.nix
     ./modules/tmux.nix
   ];
 
