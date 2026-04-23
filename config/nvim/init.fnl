@@ -67,6 +67,6 @@
   ((. behavior :setup-paredit-autocmd))
   ((. behavior :setup-diagnostics))
   ((. keymaps :setup) behavior)
-  (vim.cmd "colorscheme miniautumn")
+  (vim.cmd "colorscheme tokyonight")
   ((. behavior :setup-terminal-send-maps))
   ((. behavior :setup-treesitter-autocmd)))
