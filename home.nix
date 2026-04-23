@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -13,13 +13,22 @@
     stateVersion = "25.11";
 
     packages = [
+      pkgs.bun
+      pkgs.codex
       pkgs.deadnix
       pkgs.fennel-ls
       pkgs.fnlfmt
       pkgs.just
       pkgs.luaPackages.fennel
       pkgs.nixfmt
+      pkgs.nodejs
+      pkgs.pnpm
       pkgs.statix
+      pkgs.uv
+    ];
+
+    sessionPath = [
+      "${config.home.profileDirectory}/bin"
     ];
   };
 
