@@ -13,6 +13,12 @@ let
   '';
 in
 {
+  programs.neovim = {
+    enable = true;
+    withPython3 = false;
+    withRuby = false;
+  };
+
   xdg.configFile = {
     "nvim/init.lua".source = nvimConfig + "/init.lua";
     "nvim/queries".source = source + "/queries";
