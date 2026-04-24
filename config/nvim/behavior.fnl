@@ -1,4 +1,6 @@
 (local vim _G.vim)
+(var latest-term-buf nil)
+(var latest-term-chan-id nil)
 
 (fn toggle-quickfix []
   (let [winid (. (vim.fn.getqflist {:winid true}) :winid)]
@@ -27,19 +29,30 @@
                                                             {:buffer true}))}))
 
 (fn setup-terminal-send-maps []
-  (let [get-first-term-chan-id (fn []
-                                 (var chan nil)
-                                 (each [_ buf (ipairs (vim.api.nvim_list_bufs))]
-                                   (when (= (. vim.bo [buf] :buftype) :terminal)
-                                     (let [terminal-id (. vim.b [buf]
-                                                          :terminal_job_id)]
-                                       (when (and terminal-id (not chan))
-                                         (set chan terminal-id)))))
-                                 chan)
+  (let [track-terminal (fn [buf]
+                         (let [terminal-id (vim.api.nvim_buf_get_var buf
+                                                                     :terminal_job_id)]
+                           (set latest-term-buf buf)
+                           (set latest-term-chan-id terminal-id)))
+        clear-tracked-terminal (fn [buf]
+                                 (when (= buf latest-term-buf)
+                                   (set latest-term-buf nil)
+                                   (set latest-term-chan-id nil)))
+        get-latest-term-chan-id (fn []
+                                  (when latest-term-chan-id
+                                    (let [status (. (vim.fn.jobwait [latest-term-chan-id]
+                                                                    0)
+                                                    1)]
+                                      (if (= status -1)
+                                          latest-term-chan-id
+                                          (do
+                                            (set latest-term-buf nil)
+                                            (set latest-term-chan-id nil)
+                                            nil)))))
         send-to-term (fn [lines]
-                       (let [chan-id (get-first-term-chan-id)]
+                       (let [chan-id (get-latest-term-chan-id)]
                          (if (not chan-id)
-                             (vim.notify "No terminal buffer found. Please open a terminal first (e.g., :term)"
+                             (vim.notify "No active terminal found. Open a terminal first with <Leader>tt or :term"
                                          vim.log.levels.WARN)
                              (do
                                (table.insert lines "")
@@ -66,6 +79,15 @@
                                   (vim.fn.setreg :t saved-reg)
                                   (vim.fn.winrestview view)
                                   (send-to-term (vim.split text "\n")))))))]
+    (vim.api.nvim_create_autocmd :TermOpen
+                                 {:group (vim.api.nvim_create_augroup :latest-terminal-track
+                                                                      {:clear true})
+                                  :callback (fn [args]
+                                              (track-terminal args.buf))})
+    (vim.api.nvim_create_autocmd [:TermClose :BufWipeout]
+                                 {:group :latest-terminal-track
+                                  :callback (fn [args]
+                                              (clear-tracked-terminal args.buf))})
     (vim.keymap.set :n :<LocalLeader>l send-line {:desc "Send Line to Term"})
     (vim.keymap.set :x :<LocalLeader>v send-selection
                     {:desc "Send Selection to Term"})
