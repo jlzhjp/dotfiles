@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -15,7 +20,7 @@
 
     packages = [
       pkgs.bun
-      pkgs.codex
+      inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.deadnix
       pkgs.fennel-ls
       pkgs.fnlfmt
