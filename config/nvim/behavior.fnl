@@ -2,17 +2,6 @@
 (var latest-term-buf nil)
 (var latest-term-chan-id nil)
 
-(fn toggle-quickfix []
-  (let [winid (. (vim.fn.getqflist {:winid true}) :winid)]
-    (vim.cmd (if (not= winid 0) :cclose :copen))))
-
-(fn toggle-locations []
-  (let [winid (. (vim.fn.getloclist 0 {:winid true}) :winid)]
-    (vim.cmd (if (not= winid 0) :lclose :lopen))))
-
-(fn yaml-schemas []
-  ((. (. (require :schemastore) :yaml) :schemas)))
-
 (fn setup-paredit-autocmd []
   (vim.api.nvim_create_autocmd :FileType
                                {:pattern [:clojure :racket :scheme :lisp]
@@ -28,7 +17,7 @@
                                             (vim.keymap.set :i "`" "`"
                                                             {:buffer true}))}))
 
-(fn setup-terminal-send-maps []
+(fn setup-terminal-send []
   (let [track-terminal (fn [buf]
                          (let [terminal-id (vim.api.nvim_buf_get_var buf
                                                                      :terminal_job_id)]
@@ -88,11 +77,7 @@
                                  {:group :latest-terminal-track
                                   :callback (fn [args]
                                               (clear-tracked-terminal args.buf))})
-    (vim.keymap.set :n :<LocalLeader>l send-line {:desc "Send Line to Term"})
-    (vim.keymap.set :x :<LocalLeader>v send-selection
-                    {:desc "Send Selection to Term"})
-    (vim.keymap.set :n :<LocalLeader>s send-top-sexp
-                    {:desc "Send Top Sexp to Term"})))
+    {: send-line : send-selection : send-top-sexp}))
 
 (fn setup-treesitter-autocmd []
   (vim.api.nvim_create_autocmd :FileType
@@ -124,10 +109,7 @@
                                          :source :if_many
                                          :prefix ""}}))
 
-{: toggle-quickfix
- : toggle-locations
- : yaml-schemas
- : setup-paredit-autocmd
- : setup-terminal-send-maps
+{: setup-paredit-autocmd
+ : setup-terminal-send
  : setup-treesitter-autocmd
  : setup-diagnostics}

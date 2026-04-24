@@ -7,7 +7,7 @@
     `(do
        ,(unpack forms))))
 
-(fn setup [behavior]
+(fn setup [terminal-send]
   (let [nmap-leader (fn [suffix rhs desc]
                       (vim.keymap.set :n (.. :<Leader> suffix) rhs {: desc}))
         xmap-leader (fn [suffix rhs desc]
@@ -20,8 +20,16 @@
                   [:ef explore-at-file "File directory"]
                   [:ei "<Cmd>edit $MYVIMRC<CR>" :init.lua]
                   [:en "<Cmd>lua MiniNotify.show_history()<CR>" :Notifications]
-                  [:eq (. behavior :toggle-quickfix) "Quickfix list"]
-                  [:eQ (. behavior :toggle-locations) "Location list"]
+                  [:eq
+                   (fn []
+                     (let [winid (. (vim.fn.getqflist {:winid true}) :winid)]
+                       (vim.cmd (if (not= winid 0) :cclose :copen))))
+                   "Quickfix list"]
+                  [:eQ
+                   (fn []
+                     (let [winid (. (vim.fn.getloclist 0 {:winid true}) :winid)]
+                       (vim.cmd (if (not= winid 0) :lclose :lopen))))
+                   "Location list"]
                   [:f/ "<Cmd>Pick history scope=\"/\"<CR>" "\"/\" history"]
                   ["f:" "<Cmd>Pick history scope=\":\"<CR>" "\":\" history"]
                   [:fa
@@ -87,6 +95,12 @@
     (leader-maps xmap-leader
                  [[:lf
                    "<Cmd>lua require(\"conform\").format()<CR>"
-                   "Format selection"]])))
+                   "Format selection"]])
+    (vim.keymap.set :n :<LocalLeader>l (. terminal-send :send-line)
+                    {:desc "Send Line to Term"})
+    (vim.keymap.set :x :<LocalLeader>v (. terminal-send :send-selection)
+                    {:desc "Send Selection to Term"})
+    (vim.keymap.set :n :<LocalLeader>s (. terminal-send :send-top-sexp)
+                    {:desc "Send Top Sexp to Term"})))
 
 {: setup}

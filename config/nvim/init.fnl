@@ -54,19 +54,15 @@
                   [:which-key]])
   ((. (require :blink.cmp) :setup) {:completion {:list {:selection {:preselect false}}}})
   ((. (require :conform) :setup) {:default_format_opts {:lsp_format :fallback}})
-  (when vim.g.fennel_bootstrap_compiled
-    (vim.schedule (fn []
-                    (vim.notify (.. "Recompiled Fennel config from "
-                                    vim.g.fennel_bootstrap_compiled_count
-                                    " source files")
-                                vim.log.levels.INFO {:title "Neovim bootstrap"}))))
   (vim.lsp.config :racket_langserver {:filetypes [:racket]})
   (vim.lsp.config :yamlls
                   {:settings {:yaml {:schemaStore {:enable false :url ""}
-                                     :schemas ((. behavior :yaml-schemas))}}})
+                                     :schemas ((. (. (require :schemastore)
+                                                     :yaml)
+                                                  :schemas))}}})
+  (let [terminal-send ((. behavior :setup-terminal-send))]
+    ((. keymaps :setup) terminal-send))
   ((. behavior :setup-paredit-autocmd))
   ((. behavior :setup-diagnostics))
-  ((. keymaps :setup) behavior)
   (vim.cmd "colorscheme tokyonight")
-  ((. behavior :setup-terminal-send-maps))
   ((. behavior :setup-treesitter-autocmd)))
