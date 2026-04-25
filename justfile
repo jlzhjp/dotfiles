@@ -1,6 +1,9 @@
-default: all
+default: switch
 
-all: format lint
+verify: format lint
+
+switch:
+    home-manager switch --flake .#akari
 
 format:
     nixfmt flake.nix home.nix modules/*.nix
