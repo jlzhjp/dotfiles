@@ -8,6 +8,7 @@
 {
   imports = [
     ./modules/fish.nix
+    ./modules/git.nix
     ./modules/neovim.nix
     ./modules/starship.nix
     ./modules/tmux.nix

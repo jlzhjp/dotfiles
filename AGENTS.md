@@ -10,6 +10,7 @@
 - Add simple CLI tools to `home.packages`; use `programs.*` modules only when configuring the program beyond installation.
 - Keep generated files out of the source tree unless the user explicitly asks otherwise.
 - Prefer `pkgs.stdenv.hostPlatform.system` over `pkgs.system`; `pkgs.system` emits an evaluation warning in current nixpkgs.
+- Configure Git identity with `programs.git.settings.user.name` and `programs.git.settings.user.email`; `programs.git.userName` and `programs.git.userEmail` are renamed aliases that emit warnings.
 - Do not revert user changes or unrelated work in this repository.
 - At each step, capture lessons learned and update persistent memory or this file when a new repo-specific rule would prevent repeating a mistake in future work.
 
