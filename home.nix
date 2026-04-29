@@ -20,6 +20,7 @@
     stateVersion = "25.11";
 
     packages = [
+      pkgs.actionlint
       pkgs.bat
       pkgs.bun
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -27,6 +28,7 @@
       pkgs.delta
       pkgs.fennel-ls
       pkgs.fnlfmt
+      pkgs.gh
       pkgs.harper
       pkgs.just
       pkgs.luaPackages.fennel
