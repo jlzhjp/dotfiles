@@ -10,6 +10,7 @@
     ./modules/fish.nix
     ./modules/git.nix
     ./modules/neovim.nix
+    ./modules/nh.nix
     ./modules/starship.nix
     ./modules/tmux.nix
   ];
@@ -26,8 +27,11 @@
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.deadnix
       pkgs.delta
+      pkgs.fastfetch
       pkgs.fennel-ls
+      pkgs.fd
       pkgs.fnlfmt
+      pkgs.fzf
       pkgs.go
       pkgs.gopls
       pkgs.gh
@@ -36,6 +40,7 @@
       pkgs.luaPackages.fennel
       pkgs.nixd
       pkgs.nixfmt
+      pkgs.nix-output-monitor
       pkgs.nodejs
       pkgs.pnpm
       pkgs.ripgrep
@@ -45,6 +50,7 @@
       pkgs.ty
       pkgs.uv
       pkgs.yaml-language-server
+      pkgs.yq
     ];
 
     sessionPath = [
