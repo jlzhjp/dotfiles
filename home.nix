@@ -28,10 +28,13 @@
       pkgs.delta
       pkgs.fennel-ls
       pkgs.fnlfmt
+      pkgs.go
+      pkgs.gopls
       pkgs.gh
       pkgs.harper
       pkgs.just
       pkgs.luaPackages.fennel
+      pkgs.nixd
       pkgs.nixfmt
       pkgs.nodejs
       pkgs.pnpm
@@ -39,7 +42,9 @@
       pkgs.rustup
       pkgs.statix
       pkgs.tree-sitter
+      pkgs.ty
       pkgs.uv
+      pkgs.yaml-language-server
     ];
 
     sessionPath = [

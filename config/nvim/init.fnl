@@ -22,11 +22,10 @@
                    :gopls
                    :harper_ls
                    :hls
+                   :nixd
                    :racket_langserver
-                   :ocamllsp
                    :ty
-                   :yamlls
-                   :scheme_langserver])
+                   :yamlls])
   (setup-modules [[:mini.basics {:options {:extra_ui true}}]
                   [:mini.files]
                   [:mini.icons]
