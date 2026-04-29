@@ -47,6 +47,7 @@
       pkgs.nix-output-monitor
       pkgs.nodejs
       pkgs.pnpm
+      pkgs.rclone
       pkgs.ripgrep
       pkgs.rustup
       pkgs.statix
