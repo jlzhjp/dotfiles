@@ -1,9 +1,20 @@
 {
   programs.git = {
     enable = true;
-    settings.user = {
-      name = "akari";
-      email = "jvjdev@gmail.com";
+    settings = {
+      core.pager = "bat";
+      delta.navigate = true;
+      interactive.diffFilter = "delta --color-only";
+      pager = {
+        diff = "delta";
+        log = "delta";
+        reflog = "delta";
+        show = "delta";
+      };
+      user = {
+        name = "akari";
+        email = "jvjdev@gmail.com";
+      };
     };
   };
 }

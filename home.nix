@@ -24,6 +24,7 @@
       pkgs.bun
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.deadnix
+      pkgs.delta
       pkgs.fennel-ls
       pkgs.fnlfmt
       pkgs.harper
@@ -42,6 +43,12 @@
     sessionPath = [
       "${config.home.profileDirectory}/bin"
     ];
+
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+      MANPAGER = "nvim +Man!";
+    };
   };
 
   programs.home-manager.enable = true;
