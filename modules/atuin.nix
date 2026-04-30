@@ -3,7 +3,7 @@
     enable = true;
     enableFishIntegration = true;
     settings = {
-      auto_sync = false;
+      enter_accept = true;
       update_check = false;
     };
   };
