@@ -29,6 +29,8 @@
       pkgs.actionlint
       pkgs.bat
       pkgs.bun
+      pkgs.clang
+      pkgs.clang-tools
       inputs.codex-cli-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
       pkgs.deadnix
       pkgs.delta
@@ -39,6 +41,7 @@
       pkgs.go
       pkgs.gopls
       pkgs.gh
+      pkgs.gnumake
       pkgs.harper
       pkgs.just
       pkgs.luaPackages.fennel
@@ -47,6 +50,7 @@
       pkgs.nix-output-monitor
       pkgs.nodejs
       pkgs.pnpm
+      pkgs.pkg-config
       pkgs.rclone
       pkgs.ripgrep
       pkgs.rustup
