@@ -63,10 +63,10 @@ _:
       bind u select-layout -o
       bind _ resize-pane -y 100%
       bind | resize-pane -x 100%
-      bind -r > resize-pane -x "#{e|+:#{pane_width},5}"
-      bind -r < resize-pane -x "#{e|-:#{pane_width},5}"
-      bind -r - resize-pane -y "#{e|-:#{pane_height},5}"
-      bind -r + resize-pane -y "#{e|+:#{pane_height},5}"
+      bind -r > run-shell -b 'tmux resize-pane -t "#{pane_id}" -x "#{e|+:#{pane_width},5}"'
+      bind -r < run-shell -b 'tmux resize-pane -t "#{pane_id}" -x "#{e|-:#{pane_width},5}"'
+      bind -r - run-shell -b 'tmux resize-pane -t "#{pane_id}" -y "#{e|-:#{pane_height},5}"'
+      bind -r + run-shell -b 'tmux resize-pane -t "#{pane_id}" -y "#{e|+:#{pane_height},5}"'
 
       # Reload config without restarting tmux.
       bind C-r source-file ~/.config/tmux/tmux.conf \; display-message "tmux.conf reloaded"

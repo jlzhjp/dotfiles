@@ -11,8 +11,9 @@
 - Keep generated files out of the source tree unless the user explicitly asks otherwise.
 - Prefer `pkgs.stdenv.hostPlatform.system` over `pkgs.system`; `pkgs.system` emits an evaluation warning in current nixpkgs.
 - Configure Git identity with `programs.git.settings.user.name` and `programs.git.settings.user.email`; `programs.git.userName` and `programs.git.userEmail` are renamed aliases that emit warnings.
+- Preserve Vim-like tmux pane resize semantics for Prefix + `>`, `<`, `+`, and `-`: change the current pane's absolute width/height. Do not pass raw tmux format expressions directly to `resize-pane -x/-y`; expand computed sizes first so `resize-pane` receives literal numbers.
 - Do not revert user changes or unrelated work in this repository.
-- At each step, capture lessons learned and update persistent memory or this file when a new repo-specific rule would prevent repeating a mistake in future work.
+- Every time you make an edit or refactor, update this `AGENTS.md` with any repo-specific lesson learned or rule that would prevent repeating a mistake in future work. Also update persistent memory when the lesson should survive outside this repository.
 
 ## Formatting And Checks
 
