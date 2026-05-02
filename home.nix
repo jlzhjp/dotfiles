@@ -53,6 +53,7 @@
       pkgs.nodejs
       pkgs.pnpm
       pkgs.pkg-config
+      pkgs.prettier
       pkgs.rclone
       pkgs.ripgrep
       pkgs.rustup
