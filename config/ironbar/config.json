@@ -1,16 +1,18 @@
 {
+  "$schema": "https://f.jstanger.dev/github/ironbar/schema.json",
+  "name": "niri-topbar",
   "position": "top",
-  "height": 36,
+  "height": 30,
   "anchor_to_edges": true,
+  "exclusive_zone": true,
+  "popup_gap": 8,
   "start": [
     {
-      "type": "launcher",
-      "show_names": false,
-      "favorites": ["firefox", "org.gnome.Nautilus", "ghostty"]
-    },
-    {
       "type": "workspaces",
+      "name": "workspaces",
+      "class": "workspaces",
       "all_monitors": false,
+      "sort": "label",
       "name_map": {
         "1": "1",
         "2": "2",
@@ -26,15 +28,32 @@
   ],
   "center": [
     {
-      "type": "focused",
-      "show_icon": true,
-      "icon_size": 16,
-      "truncate": "end"
+      "type": "music",
+      "name": "media",
+      "class": "media",
+      "player_type": "mpris",
+      "format": "{title} - {artist}",
+      "show_status_icon": true,
+      "icon_size": 14,
+      "truncate": {
+        "mode": "end",
+        "max_length": 40
+      },
+      "show_if": "playerctl -l >/dev/null 2>&1"
     }
   ],
   "end": [
     {
+      "type": "volume",
+      "name": "volume",
+      "class": "volume",
+      "format": "{icon} {percentage}%",
+      "max_volume": 100
+    },
+    {
       "type": "sys_info",
+      "name": "system",
+      "class": "system",
       "format": [" {cpu_percent}%", "󰍛 {memory_percent}%"],
       "interval": {
         "cpu": 5,
@@ -42,15 +61,10 @@
       }
     },
     {
-      "type": "upower"
-    },
-    {
       "type": "clock",
+      "name": "clock",
+      "class": "clock",
       "format": "%Y-%m-%d %H:%M"
-    },
-    {
-      "type": "tray",
-      "icon_size": 16
     }
   ]
 }

@@ -1,59 +1,92 @@
+@define-color bg rgba(32, 36, 42, 0.76);
+@define-color fg #e8eaed;
+@define-color muted #aeb6c2;
+@define-color accent #9ad5c3;
+@define-color warning #f3c969;
+
 * {
   border: none;
-  border-radius: 0;
   box-shadow: none;
   font-family: "Iosevka Nerd Font", monospace;
-  font-size: 13px;
+  font-size: 12px;
   margin: 0;
   padding: 0;
 }
 
-window {
+.background,
+#bar,
+#bar #start,
+#bar #center,
+#bar #end,
+.container {
   background: transparent;
-  color: #e8eaed;
+  color: @fg;
 }
 
-.background {
-  background: rgba(24, 28, 32, 0.52);
+#bar {
+  min-height: 30px;
 }
 
-.container,
+.widget-container {
+  background: @bg;
+  border-radius: 8px;
+  margin: 4px 3px;
+  padding: 0 9px;
+}
+
+.widget {
+  color: @fg;
+}
+
 .popup {
-  background: transparent;
+  background: @bg;
+  border-radius: 8px;
+  color: @fg;
+  padding: 10px;
 }
 
-.launcher,
-.workspaces,
-.focused,
-.sys-info,
-.upower,
-.clock,
-.tray {
-  background: rgba(32, 36, 42, 0.72);
-  border-radius: 12px;
-  margin: 5px 4px;
-  padding: 0 10px;
+.workspaces {
+  padding: 0 4px;
 }
 
 .workspaces .item {
   background: transparent;
   border-radius: 999px;
-  color: #aeb6c2;
-  margin: 5px 2px;
-  min-width: 22px;
+  color: @muted;
+  margin: 3px 1px;
+  min-height: 20px;
+  min-width: 20px;
   padding: 0 6px;
 }
 
 .workspaces .item.focused,
 .workspaces .item.active {
-  background: #9ad5c3;
+  background: @accent;
   color: #121416;
 }
 
-.focused {
-  color: #dfe4ea;
+.music,
+.volume,
+.system,
+.clock {
+  padding: 0 2px;
+}
+
+.music {
+  color: @fg;
+}
+
+.volume,
+.system {
+  color: @fg;
 }
 
 .clock {
-  color: #f3c969;
+  color: @warning;
+  font-weight: 700;
+}
+
+.popup-music .controls button {
+  border-radius: 999px;
+  padding: 4px 8px;
 }

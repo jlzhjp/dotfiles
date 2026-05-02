@@ -4,7 +4,10 @@
 input {
     keyboard {
         xkb {
+            options "caps:swapescape"
         }
+        repeat-delay 250
+        repeat-rate 45
         numlock
     }
 
@@ -18,6 +21,7 @@ input {
 
 layout {
     gaps 12
+    background-color "transparent"
     center-focused-column "on-overflow"
     default-column-width { proportion 0.5; }
 
@@ -49,8 +53,15 @@ layout {
 spawn-at-startup "mako"
 spawn-at-startup "ironbar"
 spawn-at-startup "awww-daemon"
+spawn-at-startup "ibus-daemon" "--daemonize" "--replace" "--xim"
 spawn-sh-at-startup "~/.config/awww/slideshow.sh"
 spawn-sh-at-startup "swayidle -w timeout 900 'swaylock -f' timeout 1200 'niri msg action power-off-monitors' before-sleep 'swaylock -f'"
+
+environment {
+    GTK_IM_MODULE "ibus"
+    QT_IM_MODULE "ibus"
+    XMODIFIERS "@im=ibus"
+}
 
 prefer-no-csd
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
@@ -75,11 +86,19 @@ window-rule {
     match app-id=r#"^com\.mitchellh\.ghostty$"#
     geometry-corner-radius 14
     clip-to-geometry true
+    background-effect {
+        blur true
+    }
 }
 
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+}
+
+layer-rule {
+    match namespace="^awww-daemon$"
+    place-within-backdrop true
 }
 
 layer-rule {
