@@ -3,6 +3,9 @@
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "timezone": "Asia/Tokyo",
   "enabledManagers": ["github-actions", "nix"],
+  "nix": {
+    "enabled": true
+  },
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": ["* 0-3 */3 * *"],
