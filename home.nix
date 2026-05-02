@@ -15,6 +15,7 @@
     ./modules/fonts.nix
     ./modules/neovim.nix
     ./modules/nh.nix
+    ./modules/niri.nix
     ./modules/starship.nix
     ./modules/tmux.nix
     ./modules/wallpapers.nix
