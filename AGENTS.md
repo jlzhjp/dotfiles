@@ -12,6 +12,7 @@
 - Keep install-only shell tools such as ShellCheck and shfmt in `home.packages`.
 - Add install-only font packages such as Nerd Fonts directly to `home.packages`.
 - Keep standalone font packages in `modules/fonts.nix` once they are part of the maintained set.
+- Use `pkgs.nerd-fonts.fira-code` for Fira Code Nerd Font.
 - Enable `fonts.fontconfig` when managing user fonts so fontconfig-based applications can discover Home Manager-installed fonts.
 - Keep generated files out of the source tree unless the user explicitly asks otherwise.
 - Prefer `pkgs.stdenv.hostPlatform.system` over `pkgs.system`; `pkgs.system` emits an evaluation warning in current nixpkgs.
