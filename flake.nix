@@ -20,24 +20,13 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      fedoraNixConfigurations."atri" = {
-        prefix = pkgs.buildEnv {
-          name = "system-nix-prefix";
-          paths = [ home-manager.packages.${system}.default ];
-        };
-        graphicsDrivers = pkgs.buildEnv {
-          name = "system-nix-graphics-driver";
-          paths = with pkgs; [
-            mesa
-            libvdpau-va-gl
-            intel-media-driver
-          ];
-        };
+      fedoraNixConfigurations."atri" = import ./atri/system.nix {
+        inherit inputs pkgs;
       };
       homeConfigurations."akari" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home.nix ];
+        modules = [ ./akari/home.nix ];
       };
     };
 }
