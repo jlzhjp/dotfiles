@@ -3,6 +3,6 @@
 {
   programs.nh = {
     enable = true;
-    flake = "${config.home.homeDirectory}/.config/home-manager";
+    flake = "${config.home.homeDirectory}/nix-config";
   };
 }
