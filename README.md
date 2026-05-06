@@ -1,16 +1,14 @@
-# Home Manager Configuration
+# Fedora Nix Configuration
 
-Nix Home Manager configuration for `akari`.
+Fedora bootc Nix configuration and Home Manager profile for `akari`.
 
 ## Bootstrap
 
-Install Nix first, then place this repository at Home Manager's default config
-location:
+Install Nix first, then place this repository at the documented config path:
 
 ```sh
-mkdir -p ~/.config
-git clone https://github.com/jlzhjp/dotfiles ~/.config/home-manager
-cd ~/.config/home-manager
+git clone https://github.com/jlzhjp/dotfiles ~/nix-config
+cd ~/nix-config
 ```
 
 Apply the flake once with `nix run`. This works even before the
@@ -23,12 +21,28 @@ nix run github:nix-community/home-manager -- switch --flake .#akari
 After the first switch, use the installed command:
 
 ```sh
-home-manager switch --flake ~/.config/home-manager#akari
+home-manager switch --flake ~/nix-config#akari
 ```
+
+## System Configuration
+
+The flake also exposes Fedora system components under
+`fedoraNixConfigurations.${host}`. For example, the current host is available
+as `fedoraNixConfigurations.atri`.
+
+- `fedoraNixConfigurations.${host}.prefix` is a Unix-style Nix prefix for
+  global packages and system helper tools.
+- Add `prefix/bin` to `PATH`.
+- Add `prefix/share` to the XDG data directories.
+- Link `fedoraNixConfigurations.${host}.graphicsDrivers` to
+  `/run/opengl-driver` so Nix GUI applications can find the graphics drivers.
+
+An example rebuild helper is available at
+<https://github.com/jlzhjp/silverblue/blob/main/bin/fedora-nix-rebuild>.
 
 ## Daily Use
 
-Format and lint everything:
+Format, lint, and apply both Home Manager and system components:
 
 ```sh
 just
@@ -46,11 +60,11 @@ Update inputs and apply:
 ```sh
 nix flake update
 just
-home-manager switch --flake .#akari
 ```
 
 ## Layout
 
+- `flake.nix` exposes Home Manager and Fedora Nix system configurations.
 - `home.nix` contains the user profile, packages, and shared session settings.
 - `modules/` contains Home Manager modules for managed programs.
 - `config/` contains application source files used by those modules.

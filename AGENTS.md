@@ -2,12 +2,22 @@
 
 ## Working Rules
 
-- This repository is a Nix Home Manager configuration for user `akari`.
+- This repository contains a Fedora Nix system configuration and a Home Manager profile for user `akari`.
 - Ask for elevated approval before running `nix`, `home-manager`, `just`, or other commands that need to escape the sandbox.
 - Keep user-facing Home Manager code in modules under `modules/`; keep application source files under `config/`.
 - Add simple CLI tools to `home.packages`; use `programs.*` modules only when configuring the program beyond installation.
 - Keep generated files out of the source tree unless the user explicitly asks otherwise.
 - Do not revert user changes or unrelated work in this repository.
+
+## Fedora Nix System
+
+- Keep Fedora system components under `fedoraNixConfigurations.${host}`.
+- Put global packages and system helper tools in `fedoraNixConfigurations.${host}.prefix`, which is treated as a Unix-style prefix.
+- The rebuild helper is expected to add `prefix/bin` to `PATH` and `prefix/share` to XDG data directories.
+- Put graphics driver packages in `fedoraNixConfigurations.${host}.graphicsDrivers`.
+- The rebuild helper is expected to link `fedoraNixConfigurations.${host}.graphicsDrivers` to `/run/opengl-driver` so Nix GUI apps can use the graphics stack.
+- Document examples using `~/nix-config` as the config path.
+- An example helper can be found at <https://github.com/jlzhjp/silverblue/blob/main/bin/fedora-nix-rebuild>.
 
 ## Home Manager
 
@@ -39,5 +49,5 @@
 
 - After editing, run `just verify`.
 - Use `just format` for formatting only and `just lint` for checks only.
-- Use `just` or `just switch` to apply the Home Manager configuration.
+- Use `just` or `just switch` to apply the Home Manager configuration and Fedora Nix system components.
 - If `just` is not installed yet, switch Home Manager first or run the commands from `justfile` directly.
