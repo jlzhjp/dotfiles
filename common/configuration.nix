@@ -7,7 +7,17 @@
 {
   boot = {
     initrd.systemd.enable = true;
+    kernelModules = [ "tcp_bbr" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    kernel.sysctl = {
+      "kernel.dmesg_restrict" = 1;
+      "kernel.kptr_restrict" = 2;
+      "kernel.sysrq" = 1;
+      "kernel.unprivileged_bpf_disabled" = 1;
+      "net.core.default_qdisc" = "fq";
+      "net.ipv4.tcp_congestion_control" = "bbr";
+      "vm.swappiness" = 10;
+    };
     lanzaboote = {
       enable = true;
       pkiBundle = "/var/lib/sbctl";
