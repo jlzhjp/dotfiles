@@ -29,7 +29,10 @@
     }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
     in
     {
       devShells.${system}.default = pkgs.mkShell {
@@ -41,6 +44,15 @@
           nixd
           nixfmt
           statix
+        ];
+      };
+
+      homeConfigurations.akari = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          ./akari/home.nix
         ];
       };
 
