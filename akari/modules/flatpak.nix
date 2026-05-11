@@ -12,7 +12,6 @@
     "com.obsproject.Studio"
     "com.qq.QQ"
     "com.tencent.WeChat"
-    "io.github.kolunmi.Bazaar"
     "org.qbittorrent.qBittorrent"
     "org.telegram.desktop"
   ];
