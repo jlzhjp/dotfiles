@@ -8,22 +8,12 @@
 {
   imports = [
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
+    ./modules/flatpak.nix
     ./modules/fonts.nix
     ./modules/neovim.nix
     ./modules/starship.nix
     ./modules/tmux.nix
     ./modules/wallpapers.nix
-  ];
-
-  services.flatpak.packages = [
-    "com.github.tchx84.Flatseal"
-    "com.github.xournalpp.xournalpp"
-    "com.obsproject.Studio"
-    "com.qq.QQ"
-    "com.tencent.WeChat"
-    "io.github.kolunmi.Bazaar"
-    "org.qbittorrent.qBittorrent"
-    "org.telegram.desktop"
   ];
 
   home = {
