@@ -20,7 +20,7 @@
     };
 
     nix-flatpak = {
-      url = "github:gmodena/nix-flatpak";
+      url = "github:gmodena/nix-flatpak/latest";
     };
   };
 
@@ -28,7 +28,6 @@
     inputs@{
       home-manager,
       lanzaboote,
-      nix-flatpak,
       nixpkgs,
       ...
     }:
