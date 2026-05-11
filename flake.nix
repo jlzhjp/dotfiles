@@ -18,12 +18,18 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{
       home-manager,
       lanzaboote,
+      nix-flatpak,
       nixpkgs,
       ...
     }:
