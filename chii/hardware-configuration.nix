@@ -22,6 +22,18 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/5494-3ACF";
+    fsType = "vfat";
+    options = [
+      "fmask=0177"
+      "dmask=0077"
+    ];
+  };
+
+  boot.initrd.luks.devices."cryptroot".device =
+    "/dev/disk/by-uuid/80376b50-6e84-44da-8f03-80b05e73f451";
+
   fileSystems."/" = {
     device = "/dev/mapper/cryptroot";
     fsType = "btrfs";
@@ -31,9 +43,6 @@
       "compress=zstd:3"
     ];
   };
-
-  boot.initrd.luks.devices."cryptroot".device =
-    "/dev/disk/by-uuid/80376b50-6e84-44da-8f03-80b05e73f451";
 
   fileSystems."/home" = {
     device = "/dev/mapper/cryptroot";
@@ -55,12 +64,16 @@
     ];
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5494-3ACF";
-    fsType = "vfat";
+  boot.initrd.luks.devices."cryptdata".device =
+    "/dev/disk/by-uuid/77f8ddc9-0c6d-483a-af27-45f0a4e53455";
+
+  fileSystems."/mnt/data/home" = {
+    device = "dev/mapper/cryptdata";
+    fsType = "btrfs";
     options = [
-      "fmask=0177"
-      "dmask=0077"
+      "subvol=@home"
+      "noatime"
+      "compress=zstd:3"
     ];
   };
 
