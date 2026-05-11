@@ -49,6 +49,10 @@
   fonts.packages = with pkgs; [
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
+    geist-font
+    nerd-fonts.fira-code
+    nerd-fonts.iosevka
+    nerd-fonts.iosevka-term
   ];
 
   i18n = {

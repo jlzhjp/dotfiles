@@ -9,7 +9,6 @@
   imports = [
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
     ./modules/flatpak.nix
-    ./modules/fonts.nix
     ./modules/neovim.nix
     ./modules/starship.nix
     ./modules/tmux.nix
