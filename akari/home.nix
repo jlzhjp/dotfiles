@@ -27,6 +27,7 @@
       # CLI tools
       bat
       delta
+      distrobox
       fastfetch
       fd
       rclone
