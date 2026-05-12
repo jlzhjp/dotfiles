@@ -11,7 +11,6 @@
   (set-options vim.g [[:mapleader " "] [:maplocalleader ","]])
   (set-options vim.o
                [[:mouse :a]
-                [:mousescroll "ver:25,hor:6"]
                 [:switchbuf :usetab]
                 [:undofile true]
                 [:shada "'100,<50,s10,:1000,/100,@100,h"]])
