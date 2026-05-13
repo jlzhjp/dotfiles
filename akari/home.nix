@@ -73,6 +73,7 @@
       pnpm
       racket
       rustup
+      typst
       uv
     ];
 
