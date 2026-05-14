@@ -63,12 +63,6 @@
       # Language toolchains
       bun
       clang
-      (coq.withPackages (
-        ps: with ps; [
-          stdlib
-          coq-lsp
-        ]
-      ))
       go
       nodejs
       pnpm
