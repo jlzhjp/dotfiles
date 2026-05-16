@@ -7,7 +7,7 @@
     `(do
        ,(unpack forms))))
 
-(fn setup [terminal-send]
+(fn setup []
   (let [nmap-leader (fn [suffix rhs desc]
                       (vim.keymap.set :n (.. :<Leader> suffix) rhs {: desc}))
         xmap-leader (fn [suffix rhs desc]
@@ -95,12 +95,6 @@
     (leader-maps xmap-leader
                  [[:lf
                    "<Cmd>lua require(\"conform\").format()<CR>"
-                   "Format selection"]])
-    (vim.keymap.set :n :<LocalLeader>l (. terminal-send :send-line)
-                    {:desc "Send Line to Term"})
-    (vim.keymap.set :x :<LocalLeader>v (. terminal-send :send-selection)
-                    {:desc "Send Selection to Term"})
-    (vim.keymap.set :n :<LocalLeader>s (. terminal-send :send-top-sexp)
-                    {:desc "Send Top Sexp to Term"})))
+                   "Format selection"]])))
 
 {: setup}

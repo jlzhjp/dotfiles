@@ -42,10 +42,6 @@
                                                    :suffix_last ""
                                                    :suffix_next ""}
                                         :search_method :cover_or_next})
-  (vim.keymap.del :x :ys)
-  (vim.keymap.set :x :S ":<C-u>lua MiniSurround.add('visual')<CR>"
-                  {:silent true})
-  (vim.keymap.set :n :yss :ys_ {:remap true})
   (setup-modules [[:mini.ai]
                   [:mini.jump2d]
                   [:mini.pairs]
@@ -62,9 +58,7 @@
                                      :schemas ((. (. (require :schemastore)
                                                      :yaml)
                                                   :schemas))}}})
-  (let [terminal-send ((. behavior :setup-terminal-send))]
-    ((. keymaps :setup) terminal-send))
-  ((. behavior :setup-paredit-autocmd))
-  ((. behavior :setup-diagnostics))
-  (vim.cmd "colorscheme tokyonight")
-  ((. behavior :setup-treesitter-autocmd)))
+  ((. behavior :setup))
+  ((. keymaps :setup))
+  (vim.cmd "colorscheme tokyonight"))
+)
