@@ -60,5 +60,5 @@
                                                   :schemas))}}})
   ((. behavior :setup))
   ((. keymaps :setup))
-  (vim.cmd "colorscheme tokyonight"))
+  (vim.cmd "colorscheme modus_vivendi"))
 )

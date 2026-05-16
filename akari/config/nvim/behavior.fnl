@@ -111,8 +111,31 @@
                                          :source :if_many
                                          :prefix ""}}))
 
+(fn setup-pack-commands []
+  (let [pack-clean (fn []
+                     (let [all-plugins (vim.pack.get)
+                           unused []]
+                       (each [_ plugin (ipairs all-plugins)]
+                         (when (not plugin.active)
+                           (table.insert unused plugin.spec.name)))
+                       (if (= (length unused) 0)
+                           (vim.notify "No unused plugins found."
+                                       vim.log.levels.INFO)
+                           (let [msg (.. "Remove the following unused plugins?\n"
+                                         (table.concat unused "\n"))]
+                             (when (= (vim.fn.confirm msg "&Yes\n&No" 2) 1)
+                               (vim.pack.del unused)
+                               (vim.notify (.. "Cleaned " (length unused)
+                                               " plugins.")
+                                           vim.log.levels.INFO))))))
+        pack-update (fn []
+                      (vim.pack.update))]
+    (vim.api.nvim_create_user_command :PackClean pack-clean {})
+    (vim.api.nvim_create_user_command :PackUpdate pack-update {})))
+
 (fn setup []
   (setup-terminal-send)
+  (setup-pack-commands)
   (setup-paredit-autocmd)
   (setup-diagnostics)
   (setup-treesitter-autocmd))
