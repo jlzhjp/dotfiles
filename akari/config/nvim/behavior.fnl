@@ -4,7 +4,11 @@
 
 (fn setup-paredit-autocmd []
   (vim.api.nvim_create_autocmd :FileType
-                               {:pattern [:clojure :racket :scheme :lisp]
+                               {:pattern [:clojure
+                                          :racket
+                                          :scheme
+                                          :lisp
+                                          :fennel]
                                 :callback (fn []
                                             ((. (require :nvim-paredit) :setup) {:filetypes [:clojure
                                                                                              :fennel

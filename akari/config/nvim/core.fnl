@@ -8,7 +8,11 @@
        ,(unpack forms))))
 
 (fn setup []
-  (set-options vim.g [[:mapleader " "] [:maplocalleader ","]])
+  (set-options vim.g
+               [[:mapleader " "]
+                [:maplocalleader ","]
+                [:rainbow_delimiters
+                 {:whitelist [:clojure :racket :scheme :lisp :fennel]}]])
   (set-options vim.o
                [[:mouse :a]
                 [:switchbuf :usetab]
