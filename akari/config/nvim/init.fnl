@@ -61,4 +61,3 @@
   ((. behavior :setup))
   ((. keymaps :setup))
   (vim.cmd "colorscheme modus_vivendi"))
-)
