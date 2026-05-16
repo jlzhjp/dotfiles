@@ -32,6 +32,7 @@
                       [:pumborder :single]
                       [:pumheight 10]
                       [:pummaxwidth 100]
+                      [:relativenumber true]
                       [:ruler false]
                       [:shortmess :CFOSWaco]
                       [:showmode false]
