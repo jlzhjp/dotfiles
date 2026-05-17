@@ -48,17 +48,12 @@
       zed-editor
 
       # Language servers and formatters
-      actionlint
       clang-tools
       fish-lsp
       gopls
       harper
-      prettier
-      shellcheck
-      shfmt
       ty
       tinymist
-      yaml-language-server
 
       # Language toolchains
       bun
@@ -70,6 +65,9 @@
       rustup
       typst
       uv
+
+      # Gaming
+      gamescope
     ];
 
     sessionVariables = {

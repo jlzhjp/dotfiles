@@ -16,6 +16,7 @@ _:
       "org.qbittorrent.qBittorrent"
       "org.telegram.desktop"
       "com.valvesoftware.Steam"
+      "net.lutris.Lutris"
       "com.github.Matoking.protontricks"
       "net.davidotek.pupgui2"
     ];
