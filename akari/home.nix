@@ -33,6 +33,7 @@
       fd
       rclone
       ripgrep
+      unrar
       yq
 
       # Development tools
