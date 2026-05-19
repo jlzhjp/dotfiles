@@ -33,6 +33,7 @@
       fd
       rclone
       ripgrep
+      sops
       unrar
       yq
 
