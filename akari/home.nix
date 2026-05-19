@@ -31,6 +31,7 @@
       distrobox
       fastfetch
       fd
+      openssl
       rclone
       ripgrep
       sops
