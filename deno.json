@@ -1,0 +1,9 @@
+{
+  "tasks": {},
+  "fmt": {
+    "semiColons": false
+  },
+  "imports": {
+    "@std/path": "jsr:@std/path@^1.1.6"
+  }
+}
