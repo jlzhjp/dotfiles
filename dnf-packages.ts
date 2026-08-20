@@ -23,6 +23,7 @@ export const dnfPackages = {
     "aria2",
     "rclone",
     "tailscale",
+    "clash-meta",
   ],
   cli: [
     "bat",
@@ -36,7 +37,6 @@ export const dnfPackages = {
     "fzf",
     "zoxide",
     "fastfetch",
-    "mosh",
   ],
   cloudNative: [
     "kubernetes-client",
