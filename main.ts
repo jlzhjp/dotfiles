@@ -34,6 +34,7 @@ const image = await Promise.all([
     "/var/cache/ibus",
     "/var/cache/ldconfig",
     "/var/cache/libdnf5",
+    "/var/cache/tailscale",
     "/var/lib/dnf",
     "/var/log/dnf5.log*",
     "/tmp/nvim.root",
@@ -41,6 +42,12 @@ const image = await Promise.all([
   services([
     "systemd-homed.service",
     "systemd-homed-firstboot.service",
+  ]),
+
+  shell([
+    "sed -i '/^docker:/d' /etc/group",
+    "printf '%s\\n' 'g docker -' >/usr/lib/sysusers.d/docker.conf",
+    "printf '%s\\n' 'd /var/cache/tailscale 0755 root root -' >/usr/lib/tmpfiles.d/tailscale.conf",
   ]),
 
   shell(["bootc container lint"]),
