@@ -5,8 +5,10 @@ import { dnf } from "./lib/dnf.ts"
 import { from } from "./lib/image.ts"
 import { dnfPackages } from "./dnf-packages.ts"
 import { repos } from "./lib/repo.ts"
-import { service as services } from "./lib/service.ts"
+import { services } from "./lib/service.ts"
 import { coprs } from "./lib/copr.ts"
+import { rm } from "./lib/rm.ts"
+import { shell } from "./lib/shell.ts"
 
 const image = await Promise.all([
   from("quay.io/fedora/fedora-silverblue", "44", {}),
@@ -24,13 +26,24 @@ const image = await Promise.all([
   ]),
   dnf([
     ...Object.values(dnfPackages).flat(),
-    "https://bitwarden.com/download/?app=desktop&platform=linux&variant=rpm",
     "https://persistent.oaistatic.com/codex-app-prod/linux/rpm/latest/chatgpt.x86_64.rpm",
+  ]),
+  rm([
+    "/run/dnf",
+    "/var/cache/dnf",
+    "/var/cache/ibus",
+    "/var/cache/ldconfig",
+    "/var/cache/libdnf5",
+    "/var/lib/dnf",
+    "/var/log/dnf5.log*",
+    "/tmp/nvim.root",
   ]),
   services([
     "systemd-homed.service",
     "systemd-homed-firstboot.service",
   ]),
+
+  shell(["bootc container lint"]),
 ])
 
 const workdir = await getWorkdir()

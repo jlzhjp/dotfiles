@@ -34,7 +34,6 @@ export const dnfPackages = {
     "direnv",
     "eza",
     "fzf",
-    "starship",
     "zoxide",
     "fastfetch",
     "mosh",
