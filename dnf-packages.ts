@@ -2,7 +2,6 @@ export const dnfPackages = {
   system: [
     "git",
     "distrobox",
-    "systemd-homed",
   ],
   terminal: [
     "ghostty",
@@ -12,8 +11,6 @@ export const dnfPackages = {
   ],
   cryptography: [
     "age",
-    "sops",
-    "openssl",
   ],
   docker: [
     "docker-ce",
@@ -34,14 +31,11 @@ export const dnfPackages = {
     "fd-find",
     "jq",
     "yq",
-    "wl-clipboard",
     "direnv",
     "eza",
     "fzf",
     "starship",
     "zoxide",
-    "psmisc", // pstree, killall, fuser, pslog
-    "lsof",
     "fastfetch",
     "mosh",
   ],
@@ -55,7 +49,6 @@ export const dnfPackages = {
     "cmake",
   ],
   database: [
-    "duckdb",
     "sqlite",
   ],
 }

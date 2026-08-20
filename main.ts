@@ -5,7 +5,7 @@ import { dnf } from "./lib/dnf.ts"
 import { from } from "./lib/image.ts"
 import { dnfPackages } from "./dnf-packages.ts"
 import { repos } from "./lib/repo.ts"
-import { service } from "./lib/service.ts"
+import { service as services } from "./lib/service.ts"
 import { coprs } from "./lib/copr.ts"
 
 const image = await Promise.all([
@@ -27,7 +27,7 @@ const image = await Promise.all([
     "https://bitwarden.com/download/?app=desktop&platform=linux&variant=rpm",
     "https://persistent.oaistatic.com/codex-app-prod/linux/rpm/latest/chatgpt.x86_64.rpm",
   ]),
-  service([
+  services([
     "systemd-homed.service",
     "systemd-homed-firstboot.service",
   ]),
