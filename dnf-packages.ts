@@ -2,6 +2,7 @@ export const dnfPackages = {
   system: [
     "git",
     "distrobox",
+    "systemd-homed",
   ],
   terminal: [
     "ghostty",
@@ -14,9 +15,17 @@ export const dnfPackages = {
     "sops",
     "openssl",
   ],
-  download: [
+  docker: [
+    "docker-ce",
+    "docker-ce-cli",
+    "containerd.io",
+    "docker-buildx-plugin",
+    "docker-compose-plugin",
+  ],
+  network: [
     "aria2",
     "rclone",
+    "tailscale",
   ],
   cli: [
     "bat",

@@ -1,5 +1,7 @@
 {
-  "tasks": {},
+  "tasks": {
+    "gen": "deno --allow-write main.ts"
+  },
   "fmt": {
     "semiColons": false
   },
