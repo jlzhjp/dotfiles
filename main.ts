@@ -54,5 +54,5 @@ const image = await Promise.all([
 ])
 
 const workdir = await getWorkdir()
-const containerfile = path.join(workdir, "Containerfile")
-Deno.writeTextFile(containerfile, image.join("\n"))
+const containerFile = path.join(workdir, "Containerfile")
+Deno.writeTextFile(containerFile, image.join("\n"))
