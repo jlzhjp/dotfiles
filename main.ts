@@ -31,6 +31,7 @@ const image = await Promise.all([
     ]),
     dnfCoprs([
       "scottames/ghostty",
+      "alternateved/keyd",
     ]),
     dnfInstall([
       "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm",

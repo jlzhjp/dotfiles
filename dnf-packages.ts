@@ -2,6 +2,8 @@ export const dnfPackages = {
   system: [
     "git",
     "distrobox",
+    "ibus-rime",
+    "keyd",
   ],
   terminal: [
     "ghostty",
@@ -20,19 +22,6 @@ export const dnfPackages = {
     "aria2",
     "tailscale",
     "clash-meta",
-  ],
-  cli: [
-    "bat",
-    "ripgrep",
-    "fd-find",
-    "jq",
-    "yq",
-    "direnv",
-    "eza",
-    "fzf",
-    "zoxide",
-    "fastfetch",
-    "just",
   ],
   cpp: [
     "clang",
