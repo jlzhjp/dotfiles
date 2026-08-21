@@ -13,6 +13,7 @@ import {
   dnfRepos,
 } from "./lib/cmd/dnf.ts"
 import { rm } from "./lib/cmd/rm.ts"
+import { file } from "./lib/cmd/file.ts"
 
 import { dnfPackages } from "./dnf-packages.ts"
 
@@ -60,10 +61,27 @@ const image = await Promise.all([
       "/var/log/dnf5.log*",
       "/tmp/nvim.root",
     ]),
+  ]),
 
+  shell([
     "sed -i '/^docker:/d' /etc/group",
-    "printf '%s\\n' 'g docker -' >/usr/lib/sysusers.d/docker.conf",
-    "printf '%s\\n' 'd /var/cache/tailscale 0755 root root -' >/usr/lib/tmpfiles.d/tailscale.conf",
+    file("/usr/lib/sysusers.d/docker.conf", "g docker -"),
+    file(
+      "/usr/lib/tmpfiles.d/tailscale.conf",
+      "d /var/cache/tailscale 0755 root root -",
+    ),
+  ]),
+
+  shell([
+    file(
+      "/etc/keyd/default.conf",
+      `[ids]
+*
+
+[main]
+capslock = overload(control, esc)
+esc = capslock`,
+    ),
   ]),
 
   shell(["bootc container lint"]),

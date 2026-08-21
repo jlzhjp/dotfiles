@@ -23,10 +23,11 @@ export const dnfPackages = {
     "tailscale",
     "clash-meta",
   ],
-  cpp: [
+  dev: [
     "clang",
     "clang-tools-extra",
     "cmake",
+    "racket",
   ],
   multimedia: [
     "gstreamer1-plugins-bad-freeworld",
