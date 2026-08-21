@@ -3,6 +3,6 @@ export function from(
   tag: string,
   { alias }: { alias?: string },
 ): Promise<string> {
-  const aliasPart = alias ? `AS ${alias}` : ""
+  const aliasPart = alias ? ` AS ${alias}` : ""
   return Promise.resolve(`FROM ${image}:${tag}${aliasPart}`)
 }

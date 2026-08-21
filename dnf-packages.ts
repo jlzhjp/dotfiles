@@ -9,9 +9,6 @@ export const dnfPackages = {
     "fish",
     "tmux",
   ],
-  cryptography: [
-    "age",
-  ],
   docker: [
     "docker-ce",
     "docker-ce-cli",
@@ -21,14 +18,12 @@ export const dnfPackages = {
   ],
   network: [
     "aria2",
-    "rclone",
     "tailscale",
     "clash-meta",
   ],
   cli: [
     "bat",
     "ripgrep",
-    "btop",
     "fd-find",
     "jq",
     "yq",
@@ -37,17 +32,15 @@ export const dnfPackages = {
     "fzf",
     "zoxide",
     "fastfetch",
-  ],
-  cloudNative: [
-    "kubernetes-client",
-    "helm",
+    "just",
   ],
   cpp: [
     "clang",
     "clang-tools-extra",
     "cmake",
   ],
-  database: [
-    "sqlite",
+  multimedia: [
+    "gstreamer1-plugins-bad-freeworld",
+    "gstreamer1-plugins-ugly",
   ],
 }
