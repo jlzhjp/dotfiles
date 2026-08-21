@@ -1,9 +1,10 @@
 function shellQuote(s: string): string {
-  return `'${s.replaceAll("'", `'\"'\"'`)}'`
+  return `'${s.replaceAll("'", `'"'"'`)}'`
 }
 
 export function file(filename: string, content: string): Promise<string> {
+  const trimmedContent = shellQuote(content.trim() + "\n")
   return Promise.resolve(
-    `printf %s ${shellQuote(content)} > ${shellQuote(filename)}`,
+    `printf %s ${trimmedContent} > ${shellQuote(filename)}`,
   )
 }
