@@ -3,7 +3,7 @@ import * as path from "@std/path"
 import { getWorkdir } from "./lib/env.ts"
 
 import { from } from "./lib/image.ts"
-import { shell } from "./lib/shell.ts"
+import { run } from "./lib/shell.ts"
 
 import {
   dnfClean,
@@ -20,12 +20,12 @@ import { dnfPackages } from "./dnf-packages.ts"
 const image = await Promise.all([
   from("quay.io/fedora/fedora-silverblue", "44", {}),
 
-  shell([
+  run([
     "if [ -L /opt ]; then rm /opt; fi",
     "mkdir -p /opt",
   ]),
 
-  shell([
+  run([
     dnfRepos([
       "https://pkgs.tailscale.com/stable/fedora/tailscale.repo",
       "https://download.docker.com/linux/fedora/docker-ce.repo",
@@ -63,7 +63,7 @@ const image = await Promise.all([
     ]),
   ]),
 
-  shell([
+  run([
     "sed -i '/^docker:/d' /etc/group",
     file("/usr/lib/sysusers.d/docker.conf", "g docker -"),
     file(
@@ -72,7 +72,7 @@ const image = await Promise.all([
     ),
   ]),
 
-  shell([
+  run([
     file(
       "/etc/keyd/default.conf",
       `[ids]
@@ -84,7 +84,7 @@ esc = capslock`,
     ),
   ]),
 
-  shell(["bootc container lint"]),
+  run(["bootc container lint"]),
 ])
 
 const workdir = await getWorkdir()

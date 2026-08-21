@@ -3,7 +3,9 @@ export const dnfPackages = {
     "git",
     "distrobox",
     "ibus-rime",
+    "ibus-mozc",
     "keyd",
+    "adw-gtk3-theme",
   ],
   terminal: [
     "ghostty",
