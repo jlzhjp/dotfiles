@@ -10,3 +10,11 @@ chezmoi = "latest"
 "aqua:direnv/direnv" = "latest"
 "aqua:dandavison/delta" = "latest"
 "aqua:rclone/rclone" = "latest"
+
+[bootstrap.packages]
+"brew-cask:font-monaspace" = "latest"
+"brew-cask:font-fira-code-nerd-font" = "latest"
+"brew-cask:font-iosevka-nerd-font" = "latest"
+"brew-cask:font-iosevka-term-nerd-font" = "latest"
+"brew-cask:font-iosevka-term-slab-nerd-font" = "latest"
+"brew-cask:font-symbols-only-nerd-font" = "latest"
