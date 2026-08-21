@@ -1,0 +1,11 @@
+[tools]
+chezmoi = "latest"
+
+# CLI tools used by config.fish.
+"aqua:sharkdp/bat" = "latest"
+"aqua:eza-community/eza" = "latest"
+"aqua:junegunn/fzf" = "latest"
+"aqua:ajeetdsouza/zoxide" = "latest"
+"aqua:starship/starship" = "latest"
+"aqua:direnv/direnv" = "latest"
+"aqua:dandavison/delta" = "latest"
