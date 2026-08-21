@@ -1,0 +1,37 @@
+#!/bin/sh
+set -eu
+
+rime_dir="$HOME/.config/ibus/rime"
+mkdir -p "$rime_dir/opencc"
+
+download() {
+    url="$1"
+    destination="$2"
+    tmp="${destination}.tmp"
+    curl --fail --location --silent --show-error "$url" > "$tmp"
+    mv "$tmp" "$destination"
+}
+
+download \
+    https://raw.githubusercontent.com/iDvel/rime-ice/569ff3bc65dd4aec0a26b33c49c8bbdfa8b5fd57/opencc/emoji.txt \
+    "$rime_dir/opencc/emoji_simp.txt"
+
+download \
+    https://raw.githubusercontent.com/rime/rime-essay-simp/dc06d4c96ae72ad46b29e3aa824a5d1e8f721fd0/essay-zh-hans.txt \
+    "$rime_dir/essay-zh-hans.txt"
+
+download \
+    https://raw.githubusercontent.com/lotem/rime-octagram-data/f8ce3b534733e489a8470a7c2adf5a154e8ea069/zh-hans-t-essay-bgc.gram \
+    "$rime_dir/zh-hans-t-essay-bgc.gram"
+
+download \
+    https://raw.githubusercontent.com/lotem/rime-octagram-data/f8ce3b534733e489a8470a7c2adf5a154e8ea069/zh-hans-t-essay-bgw.gram \
+    "$rime_dir/zh-hans-t-essay-bgw.gram"
+
+download \
+    https://raw.githubusercontent.com/lotem/rime-octagram-data/97bf55046aad163c3d1881abae5312040b1bbed9/zh-hant-t-essay-bgc.gram \
+    "$rime_dir/zh-hant-t-essay-bgc.gram"
+
+download \
+    https://raw.githubusercontent.com/lotem/rime-octagram-data/97bf55046aad163c3d1881abae5312040b1bbed9/zh-hant-t-essay-bgw.gram \
+    "$rime_dir/zh-hant-t-essay-bgw.gram"
