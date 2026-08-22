@@ -1,6 +1,5 @@
 background-blur = true
 background-opacity = 0.85
-command = shell:$HOME/.local/bin/ghostty-tmux-session
 font-family = Monaspace Argon
 font-size = 14
 font-feature = ss01
