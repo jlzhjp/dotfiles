@@ -1,7 +1,9 @@
 ---
 name: "cangjie5_simp"
 import_tables:
-  - cangjie5
+  - cangjie5.base
+  - cangjie5.stem
+  - cangjie5.extended
 version: "0.18"
 sort: by_weight
 vocabulary: essay-zh-hans
