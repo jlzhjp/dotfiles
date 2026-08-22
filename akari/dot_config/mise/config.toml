@@ -3,6 +3,8 @@
 "core:deno" = "latest"
 "core:node" = "latest"
 "aqua:pnpm/pnpm" = "latest"
+"aqua:astral-sh/uv" = "latest"
+"aqua:astral-sh/ruff" = "latest"
 "aqua:openai/codex" = "latest"
 "aqua:anomalyco/opencode" = "latest"
 "aqua:twpayne/chezmoi" = "latest"
