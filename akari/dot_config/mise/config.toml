@@ -22,6 +22,7 @@
 "aqua:rclone/rclone" = "latest"
 "aqua:casey/just" = "latest"
 "aqua:sxyazi/yazi" = "latest"
+"aqua:jdx/usage" = "latest"
 
 [bootstrap.packages]
 "brew-cask:font-monaspace" = "latest"
