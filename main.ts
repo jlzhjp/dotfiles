@@ -31,6 +31,7 @@ const image = await Promise.all([
       "https://download.docker.com/linux/fedora/docker-ce.repo",
     ]),
     dnfCoprs([
+      "akari/rime-data",
       "scottames/ghostty",
       "alternateved/keyd",
     ]),
