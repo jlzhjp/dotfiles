@@ -23,6 +23,7 @@
 "aqua:casey/just" = "latest"
 "aqua:sxyazi/yazi" = "latest"
 "aqua:jdx/usage" = "latest"
+"aqua:duckdb/duckdb" = "latest"
 
 [bootstrap.packages]
 "brew-cask:font-monaspace" = "latest"
